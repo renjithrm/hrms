@@ -1,0 +1,3 @@
+// Dev flavour: installs beside prod with its own name and bundle id.
+APP_DISPLAY_NAME=REBS Dev
+BUNDLE_ID_SUFFIX=.dev

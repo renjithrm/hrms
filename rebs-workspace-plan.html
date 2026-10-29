@@ -1,0 +1,1229 @@
+<title>REBS Employee Workspace Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column for the plan, widening into a wrapping gallery of phone frames for the screens. */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --fg:#17201d; --muted:#5b6762; --line:#d9dfdc;
+  --accent:#0f6b5c; --accent-soft:#dcefe9; --warn:#a25a00; --warn-soft:#fbecd6;
+  --bad:#b3261e; --bad-soft:#f9dedb; --info:#2457a6; --info-soft:#dde7f7; --code-bg:#eaeeec;
+  --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  /* App palette: fixed, because each phone is a self-contained surface */
+  --a-bg:#f1f4f3; --a-card:#ffffff; --a-ink:#12201b; --a-sub:#5f6d68; --a-line:#e2e8e5;
+  --a-deep:#0b3f37; --a-brand:#0f6b5c; --a-brand-soft:#dcefe9; --a-on:#ffffff;
+  --a-amber:#a8640a; --a-amber-soft:#fcefd9; --a-red:#bf342a; --a-red-soft:#fde4e1;
+  --a-green:#1a7442; --a-green-soft:#dcf1e3; --a-blue:#2a5fb0; --a-blue-soft:#e1eaf8;
+  --a-frame:#1a2320;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111715; --surface:#18201d; --fg:#e4ebe8; --muted:#9aa8a2; --line:#2b3632;
+  --accent:#5cc2ad; --accent-soft:#1d3a33; --warn:#f0b35c; --warn-soft:#3a2c17;
+  --bad:#f08a80; --bad-soft:#3d1f1c; --info:#8fb3ef; --info-soft:#1d2a40; --code-bg:#1f2926;
+  --a-frame:#000000; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#111715; --surface:#18201d; --fg:#e4ebe8; --muted:#9aa8a2; --line:#2b3632;
+  --accent:#5cc2ad; --accent-soft:#1d3a33; --warn:#f0b35c; --warn-soft:#3a2c17;
+  --bad:#f08a80; --bad-soft:#3d1f1c; --info:#8fb3ef; --info-soft:#1d2a40; --code-bg:#1f2926;
+  --a-frame:#000000; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 80px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+.col{max-width:780px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(30px,5vw,46px);letter-spacing:-.01em}
+h2{font-size:26px}
+h3{font-size:16px;font-family:var(--f-body);font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lede{color:var(--muted);font-size:17px;max-width:65ch}
+section{display:flex;flex-direction:column;gap:18px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.meta b{color:var(--fg);font-weight:500}
+code,.mono{font-family:var(--f-mono);font-size:.88em}
+code{background:var(--code-bg);padding:1px 5px;border-radius:4px}
+ul,ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.panel p{color:var(--muted);font-size:14.5px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+td.num{font-variant-numeric:tabular-nums;font-family:var(--f-mono);white-space:nowrap}
+pre{background:var(--code-bg);border-radius:10px;padding:16px 18px;overflow-x:auto;font-family:var(--f-mono);font-size:13px;line-height:1.55;margin:0}
+.pill{display:inline-block;font-family:var(--f-mono);font-size:12px;padding:1px 8px;border-radius:99px;white-space:nowrap}
+.p-ok{background:var(--accent-soft);color:var(--accent)} .p-warn{background:var(--warn-soft);color:var(--warn)}
+.p-bad{background:var(--bad-soft);color:var(--bad)} .p-info{background:var(--info-soft);color:var(--info)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-family:var(--f-mono);font-size:13px}
+.flow .n{border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px}
+.flow .arr{color:var(--muted)}
+.layers{display:flex;flex-direction:column;gap:8px}
+.layer{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.layer b{font-family:var(--f-mono);font-size:13px;font-weight:500;color:var(--accent)}
+.layer span{min-width:0;color:var(--muted);font-size:14px}
+@media (max-width:520px){.layer{grid-template-columns:1fr;gap:2px}}
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.principles .panel h3{display:flex;gap:10px;align-items:baseline}
+.principles .panel h3 small{font-family:var(--f-mono);font-size:11px;color:var(--accent);font-weight:500}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.sw{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px}
+.sw i{width:34px;height:34px;border-radius:7px;flex:none;border:1px solid rgba(0,0,0,.08)}
+.sw span{font-size:12.5px;line-height:1.3;min-width:0}
+.sw code{background:none;padding:0;color:var(--muted);font-size:11px}
+
+/* ---------- Phone mockups ---------- */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px 24px}
+figure{margin:0;display:flex;flex-direction:column;gap:12px;align-items:center}
+figcaption{max-width:310px;font-size:13.5px;color:var(--muted);width:100%}
+figcaption b{color:var(--fg);display:block;font-size:14.5px;font-weight:600;margin-bottom:2px}
+.phone{width:300px;max-width:100%;height:632px;background:var(--a-frame);border-radius:40px;padding:9px;flex:none}
+.scr{background:var(--a-bg);color:var(--a-ink);border-radius:32px;height:100%;overflow:hidden;display:flex;flex-direction:column;font-family:var(--f-body);font-size:12px;line-height:1.4;position:relative}
+.ic{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic.s{width:13px;height:13px}
+.ic.l{width:22px;height:22px}
+.sb{display:flex;justify-content:space-between;padding:11px 22px 4px;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums}
+.band{background:var(--a-deep);color:var(--a-on);padding-bottom:44px}
+.hdr{display:flex;align-items:center;gap:10px;padding:8px 16px 0}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--a-brand);display:grid;place-items:center;font-weight:700;font-size:12px;color:var(--a-on);border:2px solid rgba(255,255,255,.25);flex:none}
+.who{display:flex;flex-direction:column;min-width:0;flex:1}
+.who b{font-size:14px}
+.who span{font-size:10.5px;opacity:.75}
+.spill{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:5px 9px;border-radius:99px;white-space:nowrap}
+.band .spill{background:rgba(255,255,255,.12);color:var(--a-on)}
+.band .spill.wait{background:var(--a-amber-soft);color:var(--a-amber)}
+.band .spill.bad{background:var(--a-red-soft);color:var(--a-red)}
+.appbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 16px 10px}
+.appbar h4{margin:0;font-family:var(--f-display);font-size:20px;font-weight:700}
+.appbar .spill{background:var(--a-green-soft);color:var(--a-green)}
+.appbar .spill.wait{background:var(--a-amber-soft);color:var(--a-amber)}
+.body{flex:1;overflow:hidden;padding:0 12px 10px;display:flex;flex-direction:column;gap:10px}
+.body.lift{margin-top:-36px}
+.card{background:var(--a-card);border:1px solid var(--a-line);border-radius:18px;padding:12px 13px;display:flex;flex-direction:column;gap:7px}
+.hero{box-shadow:0 8px 24px rgba(11,63,55,.12);border:0;gap:10px;padding:14px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.k{font-size:10px;color:var(--a-sub);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.v{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.sub{color:var(--a-sub);font-size:11px}
+.chip{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.chip .ic{width:11px;height:11px;stroke-width:2.4}
+.c-g{background:var(--a-green-soft);color:var(--a-green)} .c-a{background:var(--a-amber-soft);color:var(--a-amber)}
+.c-r{background:var(--a-red-soft);color:var(--a-red)} .c-b{background:var(--a-blue-soft);color:var(--a-blue)}
+.c-n{background:var(--a-line);color:var(--a-sub)}
+.loc{display:flex;gap:9px;align-items:flex-start;border-radius:12px;padding:9px 10px}
+.loc b{display:block;font-size:12.5px}
+.loc span{font-size:10.5px;opacity:.85}
+.loc.ok{background:var(--a-green-soft);color:var(--a-green)}
+.loc.bad{background:var(--a-red-soft);color:var(--a-red)}
+.loc.wait{background:var(--a-blue-soft);color:var(--a-blue)}
+.slide{height:52px;border-radius:99px;background:var(--a-brand);color:var(--a-on);position:relative;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;padding-left:40px}
+.slide .knob{position:absolute;left:5px;top:5px;width:42px;height:42px;border-radius:50%;background:var(--a-on);color:var(--a-brand);display:grid;place-items:center}
+.slide.out{background:var(--a-deep)}
+.slide.out .knob{color:var(--a-deep)}
+.slide.off{background:var(--a-line);color:var(--a-sub)}
+.slide.off .knob{color:var(--a-sub)}
+.slide .hint{position:absolute;right:16px;opacity:.6;letter-spacing:-2px}
+.btn{border-radius:14px;padding:12px;font:600 13px var(--f-body);text-align:center;background:var(--a-brand);color:var(--a-on);display:flex;gap:6px;align-items:center;justify-content:center}
+.btn.ghost{background:transparent;color:var(--a-brand);border:1.5px solid var(--a-line)}
+.btn.dis{background:var(--a-line);color:var(--a-sub)}
+.btn.sm{padding:8px 10px;font-size:12px;border-radius:11px}
+.list{display:flex;flex-direction:column}
+.li{display:grid;grid-template-columns:30px 1fr auto;gap:0 10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--a-line)}
+.li:last-child{border-bottom:0}
+.li .dt{width:30px;height:32px;border-radius:9px;background:var(--a-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.li .dt b{font-size:12px} .li .dt small{font-size:8px;color:var(--a-sub);text-transform:uppercase}
+.li .d{font-weight:600;font-variant-numeric:tabular-nums}
+.li .t{color:var(--a-sub);font-size:10.5px;font-variant-numeric:tabular-nums}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);background:var(--a-card);border-top:1px solid var(--a-line);padding:8px 8px 16px;text-align:center;font-size:10px;color:var(--a-sub)}
+.nav span{display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 0;border-radius:12px}
+.nav .on{color:var(--a-brand);font-weight:700}
+.nav .on .ic{background:var(--a-brand-soft);border-radius:99px;width:44px;height:24px;padding:4px 13px;box-sizing:border-box}
+.ringwrap{display:flex;align-items:center;gap:14px}
+.ring{position:relative;width:104px;height:104px;flex:none}
+.ring svg{width:104px;height:104px;transform:rotate(-90deg)}
+.ring .trk{fill:none;stroke:var(--a-line);stroke-width:9}
+.ring .prg{fill:none;stroke:var(--a-brand);stroke-width:9;stroke-linecap:round}
+.ring .mid{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.ring .mid b{font-family:var(--f-display);font-size:19px;font-variant-numeric:tabular-nums}
+.ring .mid span{font-size:9.5px;color:var(--a-sub)}
+.facts{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1}
+.fact .k{display:block}
+.fact .v{display:flex;align-items:center;gap:5px}
+.bal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bal .v{font-family:var(--f-display);font-size:20px}
+.bar{height:5px;border-radius:5px;background:var(--a-line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--a-brand);border-radius:5px}
+.banner{border-radius:12px;padding:8px 10px;font-size:11px;display:flex;gap:8px;align-items:flex-start}
+.b-off{background:var(--a-amber-soft);color:var(--a-amber)}
+.b-err{background:var(--a-red-soft);color:var(--a-red)}
+.scrim{position:absolute;inset:0;background:rgba(8,24,20,.48)}
+.sheet{position:absolute;inset:auto 0 0 0;background:var(--a-card);border-radius:26px 26px 0 0;padding:12px 16px 22px;display:flex;flex-direction:column;gap:11px}
+.grab{width:36px;height:4px;border-radius:4px;background:var(--a-line);align-self:center}
+.sheet h5{margin:0;font-family:var(--f-display);font-size:18px}
+.badge{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;align-self:center}
+.badge .ic{width:28px;height:28px;stroke-width:2.6}
+.mapbox{height:96px;border-radius:12px;background:#e4ece8;position:relative;overflow:hidden;border:1px solid var(--a-line)}
+.mapbox::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(35deg,transparent 0 22px,rgba(255,255,255,.7) 22px 25px),repeating-linear-gradient(-55deg,transparent 0 40px,rgba(255,255,255,.55) 40px 44px)}
+.geo{position:absolute;border-radius:50%;border:2px dashed var(--a-brand);background:rgba(15,107,92,.1)}
+.pin{position:absolute;width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.steps{display:flex;flex-direction:column;gap:8px}
+.step{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;font-size:11.5px}
+.step i{width:22px;height:22px;border-radius:50%;background:var(--a-brand-soft);color:var(--a-brand);display:grid;place-items:center;font-style:normal;font-weight:700;font-size:11px}
+.tl{display:flex;flex-direction:column}
+.tli{display:grid;grid-template-columns:26px 1fr;gap:10px;position:relative;padding-bottom:12px}
+.tli:not(:last-child)::before{content:"";position:absolute;left:12px;top:26px;bottom:0;width:2px;background:var(--a-line)}
+.tli .node{width:26px;height:26px;border-radius:50%;display:grid;place-items:center}
+.tli .node .ic{width:13px;height:13px;stroke-width:2.4}
+.tli b{font-size:12px}
+.tli .t{font-size:10.5px;color:var(--a-sub);font-variant-numeric:tabular-nums}
+.explain{background:var(--a-red-soft);border-radius:12px;padding:9px 10px;color:var(--a-ink);font-size:11px;display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.explain b{color:var(--a-red)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px 2px;text-align:center}
+.cal .h{font-size:9px;color:var(--a-sub);font-weight:600;padding-bottom:2px}
+.cal .d{height:31px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:9px;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;position:relative}
+.cal .d::after{content:"";width:5px;height:5px;border-radius:50%;background:transparent}
+.cal .p::after{background:var(--a-green)}
+.cal .pe::after{background:var(--a-amber)}
+.cal .lv{background:var(--a-blue-soft);color:var(--a-blue)}
+.cal .we,.cal .fu{color:#a9b4b0;font-weight:500}
+.cal .td{box-shadow:inset 0 0 0 1.5px var(--a-ink)}
+.cal .hold{background:repeating-linear-gradient(135deg,var(--a-amber-soft) 0 4px,#fff7ea 4px 8px);color:var(--a-amber)}
+.cal .sel{background:var(--a-brand);color:var(--a-on)}
+.cal .selx{background:var(--a-red-soft);color:var(--a-red);box-shadow:inset 0 0 0 1.5px var(--a-red)}
+.cal .ps{color:#b6c0bc;text-decoration:line-through;font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:10px;color:var(--a-sub)}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+.legend i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.typecards{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tc{border:1.5px solid var(--a-line);border-radius:14px;padding:9px 10px;background:var(--a-card);display:flex;flex-direction:column;gap:2px}
+.tc.on{border-color:var(--a-brand);background:var(--a-brand-soft)}
+.tc b{font-size:12.5px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:10.5px;color:var(--a-sub);font-weight:600}
+.inp{border:1.5px solid var(--a-line);border-radius:12px;padding:9px 10px;background:var(--a-card);font-size:12.5px}
+.inp.ok{border-color:var(--a-brand)}
+.sum{display:flex;flex-direction:column;gap:6px;background:var(--a-bg);border-radius:12px;padding:9px 10px}
+.ferr{display:flex;gap:6px;align-items:flex-start;color:var(--a-red);font-size:11px}
+.fok{display:flex;gap:6px;align-items:center;color:var(--a-green);font-size:10.5px}
+.sk{background:linear-gradient(90deg,#e6ebe9,#f3f6f5,#e6ebe9);border-radius:7px;height:12px}
+.band .sk{background:rgba(255,255,255,.14)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs span{padding:5px 11px;border-radius:99px;border:1px solid var(--a-line);font-size:10.5px;font-weight:600;background:var(--a-card);color:var(--a-sub)}
+.tabs .on{background:var(--a-ink);color:#fff;border-color:var(--a-ink)}
+.radio{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--a-line);font-size:12px}
+.radio:last-child{border-bottom:0}
+.radio i{width:16px;height:16px;border-radius:50%;border:2px solid var(--a-line)}
+.radio i.on{border:5px solid var(--a-brand)}
+.mnum{font-family:var(--f-mono);font-size:10.5px}
+.fab{position:absolute;right:14px;bottom:78px;background:var(--a-brand);color:var(--a-on);border-radius:16px;padding:12px 14px;font-weight:600;font-size:12.5px;display:flex;gap:6px;align-items:center;box-shadow:0 6px 16px rgba(11,63,55,.3)}
+.fab.dis{background:#c9d2ce;color:#fff;box-shadow:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- Interactive demo motion ---------- */
+.try{display:inline-block;margin:2px 0 4px;font-family:var(--f-mono);font-size:11px;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.slide{touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden;transition:background .3s}
+.slide .fill{position:absolute;left:0;top:0;bottom:0;width:52px;border-radius:99px;background:rgba(255,255,255,.18)}
+.slide .lbl{position:relative}
+.slide .knob{z-index:1;cursor:grab;touch-action:none}
+.slide .knob:active{cursor:grabbing}
+.slide.busy .knob .ic{animation:spin .8s linear infinite}
+.slide.done{background:var(--a-green);cursor:pointer}
+.slide.done .knob{color:var(--a-green)}
+.slide.done .hint{display:none}
+.slide .hint{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(4px);opacity:.3}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin 1s linear infinite}
+@keyframes ringIn{from{stroke-dasharray:0 327}}
+.ring .prg{animation:ringIn 1.1s cubic-bezier(.22,1,.36,1) .15s both}
+@keyframes barIn{from{width:0}}
+.bar i{animation:barIn .9s cubic-bezier(.22,1,.36,1) .25s both}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:-100% 0}}
+.sk{background-size:200% 100%;animation:shimmer 1.4s linear infinite}
+.badge.pop{animation:pop .5s cubic-bezier(.34,1.56,.64,1) both;cursor:pointer}
+.badge.pop .ic{stroke-dasharray:24;stroke-dashoffset:24;animation:draw .4s .25s ease-out forwards}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pin.pulse::after{content:"";position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--a-red);animation:radar 1.8s ease-out infinite}
+@keyframes radar{from{transform:scale(1);opacity:.8}to{transform:scale(3.2);opacity:0}}
+.beat{animation:beat 1s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.25)}}
+.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.loc,.spill,.node,.cal .d{transition:background .25s,color .25s}
+.n-ok{background:var(--a-green-soft);color:var(--a-green)}
+.n-wait{background:var(--a-amber-soft);color:var(--a-amber)}
+.n-sync{background:var(--a-blue-soft);color:var(--a-blue)}
+.n-bad{background:var(--a-red-soft);color:var(--a-red)}
+.tli{max-height:240px;transition:max-height .35s ease,opacity .25s,padding .35s}
+.tli.gone{max-height:0;opacity:0;padding-bottom:0;overflow:hidden}
+.lnk{color:var(--a-red);font-weight:600;cursor:pointer;text-decoration:underline}
+[role="button"]{cursor:pointer}
+.btn.dis{cursor:default}
+.cal .mid{background:var(--a-brand-soft);color:var(--a-brand)}
+.cal .midx{background:var(--a-red-soft);color:var(--a-red)}
+.msg-ok,.msg-hint{display:flex;gap:6px;align-items:flex-start;font-size:11px}
+.msg-ok{color:var(--a-green)} .msg-hint{color:var(--a-sub)}
+textarea.inp{font:inherit;font-size:12.5px;color:var(--a-ink);resize:none;width:100%;min-height:64px;outline:none}
+.inp.err{border-color:var(--a-red)}
+.motion td:first-child{font-weight:600;white-space:nowrap}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .badge.pop .ic{stroke-dashoffset:0}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-leave" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 1 9 9H3a9 9 0 0 1 9-9zM12 12v6.5a2.5 2.5 0 0 0 5 0"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-cloudok" viewBox="0 0 24 24"><path d="M7.5 18A4.5 4.5 0 0 1 7 9.1 6 6 0 0 1 18.5 10 4 4 0 0 1 17 18z"/><path d="M9.5 13.5l2 2 3.5-3.5"/></symbol>
+  <symbol id="i-cloudoff" viewBox="0 0 24 24"><path d="M3 3l18 18M7.5 9.2A4.5 4.5 0 0 0 7.5 18H17M20.6 15.6A4 4 0 0 0 18.5 10 6 6 0 0 0 10.4 6.3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-chevl" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></symbol>
+  <symbol id="i-gps" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3 10 14M21 3l-7 18-4-7-7-4z"/></symbol>
+</svg>
+
+<div class="wrap">
+
+<header class="col" style="display:flex;flex-direction:column;gap:14px">
+  <span class="eyebrow">Flutter assignment · REBS HRMS</span>
+  <h1>Offline-capable Employee Workspace</h1>
+  <p class="lede">Build plan and screen designs for the 8-hour assignment: dashboard, geofenced check-in/out, an offline event queue that syncs without duplicates, and a validated leave form, all against a local mock API.</p>
+  <div class="meta"><span>Platform <b>Android / iOS</b></span><span>Effort cap <b>8 h</b></span><span>Due <b>3 days after receipt</b></span><span>Design <b>v3 · interactive</b></span></div>
+</header>
+
+<section>
+  <div class="col" style="display:flex;flex-direction:column;gap:12px">
+    <span class="eyebrow">UX direction</span>
+    <h2>Seven decisions behind the screens</h2>
+    <p class="lede">An employee opens this app twice a day, often while walking in or out of the building. Every screen is built for a quick, certain action and an answer to "did it count?".</p>
+  </div>
+  <div class="principles">
+    <div class="panel"><h3>Show eligibility before the action <small>attendance</small></h3><p>The Today card reads location as soon as it opens and shows "You're at the office · 42 m" or "850 m away". People learn they can't check in before they try, not from an error afterwards.</p></div>
+    <div class="panel"><h3>One deliberate gesture <small>attendance</small></h3><p>Check-in and check-out use slide-to-confirm. A pocket tap can't trigger it and a double tap can't send it twice. The control locks the moment the event is written. With TalkBack or VoiceOver on, it becomes a button with a confirm step.</p></div>
+    <div class="panel"><h3>Sync is always visible, never in the way <small>offline</small></h3><p>A pill in the header shows "Synced", "1 waiting", "Syncing" or "Needs attention". Tapping it opens the queue with Sync Now. This replaces a whole Sync tab, so navigation drops to three tabs.</p></div>
+    <div class="panel"><h3>Say exactly what happened <small>feedback</small></h3><p>After each action a sheet confirms the time, plus either "Synced with REBS" or "Saved on this phone, sends automatically". A rejected event explains why in plain words and says what to do next.</p></div>
+    <div class="panel"><h3>Offline is a normal state <small>offline</small></h3><p>Cached screens load instantly with "Updated 17:40". No blocking spinners after the first launch. Only leave submission is unavailable offline, and the disabled button says why.</p></div>
+    <div class="panel"><h3>Prevent leave errors before reporting them <small>leave</small></h3><p>A range calendar blocks past dates and shows existing requests. A live summary shows days requested and the balance left afterwards. Field errors appear only after a field is touched, and server errors land on the field they concern.</p></div>
+    <div class="panel"><h3>Accessible by default <small>all screens</small></h3><p>Status always uses an icon plus a word, never colour alone. Tap targets are at least 48 dp. Layouts hold at 130% text size and on 360 dp wide phones. Timers announce changes at most once a minute.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="col" style="display:flex;flex-direction:column;gap:12px">
+    <span class="eyebrow">Screens</span>
+    <h2>Attendance and dashboard</h2>
+    <p class="lede">Screens labelled "Try it" respond to input with the same motion the app will use. The full list of animations is in the motion plan below the screens.</p>
+  </div>
+  <div class="gallery">
+
+  <!-- A: Dashboard, ready to check in -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>08:31</span><span>5G</span></div>
+        <div class="hdr"><div class="avatar">AN</div><div class="who"><b>Anjali Nair</b><span>EMP-1042 · Engineering</span></div><span class="spill"><svg class="ic s"><use href="#i-cloudok"/></svg>Synced</span></div>
+      </div>
+      <div class="body lift">
+        <div class="card hero">
+          <div class="row"><span class="k">Wednesday, 28 Oct</span><span class="chip c-n">Not checked in</span></div>
+          <div class="row" style="justify-content:flex-start;gap:6px;color:var(--a-sub)"><svg class="ic s"><use href="#i-clock"/></svg><span class="sub">Shift 09:00 – 18:00 · IST</span></div>
+          <div class="loc ok"><svg class="ic"><use href="#i-pin"/></svg><div><b>You're at the office</b><span>42 m from Infopark Phase 1 · accuracy ±12 m</span></div></div>
+          <div class="slide" id="a-slide" data-slide data-done="Checked in at 08:32" role="button" tabindex="0" aria-label="Slide to check in"><span class="fill"></span><span class="knob"><svg class="ic"><use href="#i-arrow"/></svg></span><span class="lbl">Slide to check in</span><span class="hint">›››</span></div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="k">Leave available</span><span class="sub" style="color:var(--a-brand);font-weight:600">Apply</span></div>
+          <div class="bal">
+            <div><span class="v">6</span> <span class="sub">casual</span><div class="bar"><i style="width:60%"></i></div></div>
+            <div><span class="v">4</span> <span class="sub">sick</span><div class="bar"><i style="width:67%"></i></div></div>
+          </div>
+        </div>
+        <div class="card" style="gap:2px">
+          <div class="row"><span class="k">Recent</span><span class="sub">See all</span></div>
+          <div class="list">
+            <div class="li"><span class="dt"><b>27</b><small>Tue</small></span><span><span class="d">08:41 – 17:52</span><br><span class="t">9h 11m</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Synced</span></div>
+            <div class="li"><span class="dt"><b>26</b><small>Mon</small></span><span><span class="d">08:55 – 18:03</span><br><span class="t">9h 08m</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Synced</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav"><span class="on"><svg class="ic"><use href="#i-home"/></svg>Today</span><span><svg class="ic"><use href="#i-cal"/></svg>Attendance</span><span><svg class="ic"><use href="#i-leave"/></svg>Leave</span></div>
+    </div></div>
+    <figcaption><b>A · Today, ready to check in</b><span class="try">Try it · drag the slider</span><br>Identity and sync state live in the header band. The Today card answers three questions in order: what's my status, am I allowed, how do I act. Location is resolved before the slider is enabled.</figcaption>
+  </figure>
+
+  <!-- B: Dashboard, checked in -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>09:47</span><span>5G</span></div>
+        <div class="hdr"><div class="avatar">AN</div><div class="who"><b>Anjali Nair</b><span>EMP-1042 · Engineering</span></div><span class="spill"><svg class="ic s"><use href="#i-cloudok"/></svg>Synced</span></div>
+      </div>
+      <div class="body lift">
+        <div class="card hero">
+          <div class="row"><span class="k">Wednesday, 28 Oct</span><span class="chip c-b"><svg class="ic"><use href="#i-clock"/></svg>Checked in</span></div>
+          <div class="ringwrap">
+            <div class="ring"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="52"/><circle class="prg" cx="60" cy="60" r="52" stroke-dasharray="45 327"/></svg><div class="mid"><b id="tick" style="font-size:16px">1:15:32</b><span>of 9h shift</span></div></div>
+            <div class="facts">
+              <div class="fact"><span class="k">Checked in</span><span class="v">08:32 <svg class="ic s" style="color:var(--a-green)"><use href="#i-cloudok"/></svg></span></div>
+              <div class="fact"><span class="k">Shift ends</span><span class="v">18:00</span></div>
+              <div class="fact"><span class="k">Location</span><span class="v" style="font-size:12px;color:var(--a-green)">At office · 38 m</span></div>
+            </div>
+          </div>
+          <div class="slide out" id="b-slide" data-slide data-done="Checked out at 09:47" role="button" tabindex="0" aria-label="Slide to check out"><span class="fill"></span><span class="knob"><svg class="ic"><use href="#i-arrow"/></svg></span><span class="lbl">Slide to check out</span><span class="hint">›››</span></div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="k">Leave available</span><span class="sub" style="color:var(--a-brand);font-weight:600">Apply</span></div>
+          <div class="bal">
+            <div><span class="v">6</span> <span class="sub">casual</span><div class="bar"><i style="width:60%"></i></div></div>
+            <div><span class="v">4</span> <span class="sub">sick</span><div class="bar"><i style="width:67%"></i></div></div>
+          </div>
+        </div>
+        <div class="card" style="gap:2px">
+          <div class="row"><span class="k">Recent</span><span class="sub">See all</span></div>
+          <div class="list">
+            <div class="li"><span class="dt"><b>27</b><small>Tue</small></span><span><span class="d">08:41 – 17:52</span><br><span class="t">9h 11m</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Synced</span></div>
+            <div class="li"><span class="dt"><b>26</b><small>Mon</small></span><span><span class="d">08:55 – 18:03</span><br><span class="t">9h 08m</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Synced</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav"><span class="on"><svg class="ic"><use href="#i-home"/></svg>Today</span><span><svg class="ic"><use href="#i-cal"/></svg>Attendance</span><span><svg class="ic"><use href="#i-leave"/></svg>Leave</span></div>
+    </div></div>
+    <figcaption><b>B · Today, checked in</b><span class="try">Try it · live timer, drag to check out</span><br>A progress ring against the shift length makes elapsed time readable at a glance. The tick beside the check-in time shows it reached the server. The slider changes colour and wording for check-out so the two actions are never confused.</figcaption>
+  </figure>
+
+  <!-- C: Success sheet -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>08:32</span><span>5G</span></div>
+        <div class="hdr"><div class="avatar">AN</div><div class="who"><b>Anjali Nair</b><span>EMP-1042 · Engineering</span></div></div>
+      </div>
+      <div class="body lift"><div class="card hero" style="height:180px"></div></div>
+      <div class="scrim"></div>
+      <div class="sheet" style="gap:12px;text-align:center">
+        <div class="grab"></div>
+        <div class="badge pop" id="c-badge" role="button" tabindex="0" aria-label="Replay the check animation" style="background:var(--a-green-soft);color:var(--a-green)"><svg class="ic"><use href="#i-check"/></svg></div>
+        <h5>Checked in at 08:32</h5>
+        <p class="sub" style="font-size:12px">Wednesday, 28 Oct · at the office, 42 m from the entrance</p>
+        <div class="row" style="justify-content:center"><span class="chip c-g" style="font-size:11px;padding:5px 10px"><svg class="ic"><use href="#i-cloudok"/></svg>Synced with REBS</span></div>
+        <div class="banner b-off" style="text-align:left"><svg class="ic s"><use href="#i-cloudoff"/></svg><span><b>Offline variant:</b> "Saved on this phone. It will send automatically when you're back online." with an amber Waiting chip.</span></div>
+        <div class="btn">Done</div>
+      </div>
+    </div></div>
+    <figcaption><b>C · Confirmation after the slide</b><span class="try">Try it · tap the tick to replay</span><br>Shows the recorded time and where, and states honestly whether the server has it. Short haptic on success. The sheet closes itself after 4 s so the person can pocket the phone.</figcaption>
+  </figure>
+
+  <!-- D: Offline with pending -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>18:06</span><span>✈︎</span></div>
+        <div class="hdr"><div class="avatar">AN</div><div class="who"><b>Anjali Nair</b><span>EMP-1042 · Engineering</span></div><span class="spill wait"><svg class="ic s"><use href="#i-cloudoff"/></svg>1 waiting</span></div>
+      </div>
+      <div class="body lift">
+        <div class="card hero">
+          <div class="row"><span class="k">Wednesday, 28 Oct</span><span class="chip c-n"><svg class="ic"><use href="#i-check"/></svg>Checked out</span></div>
+          <div class="ringwrap">
+            <div class="ring"><svg viewBox="0 0 120 120"><circle class="trk" cx="60" cy="60" r="52"/><circle class="prg" cx="60" cy="60" r="52" stroke-dasharray="327 327"/></svg><div class="mid"><b>9:34</b><span>worked</span></div></div>
+            <div class="facts">
+              <div class="fact"><span class="k">Checked in</span><span class="v">08:32 <svg class="ic s" style="color:var(--a-green)"><use href="#i-cloudok"/></svg></span></div>
+              <div class="fact"><span class="k">Checked out</span><span class="v">18:06 <svg class="ic s" style="color:var(--a-amber)"><use href="#i-cloudoff"/></svg></span></div>
+            </div>
+          </div>
+          <div class="banner b-off"><svg class="ic s"><use href="#i-cloudoff"/></svg><span>You're offline. Your check-out is saved on this phone and will send when you reconnect. Closing the app is fine.</span></div>
+        </div>
+        <div class="card" style="gap:2px">
+          <div class="row"><span class="k">Recent</span><span class="sub">Updated 17:40</span></div>
+          <div class="list">
+            <div class="li"><span class="dt"><b>28</b><small>Wed</small></span><span><span class="d">08:32 – 18:06</span><br><span class="t">9h 34m</span></span><span class="chip c-a"><svg class="ic"><use href="#i-clock"/></svg>Waiting</span></div>
+            <div class="li"><span class="dt"><b>27</b><small>Tue</small></span><span><span class="d">08:41 – 17:52</span><br><span class="t">9h 11m</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Synced</span></div>
+            <div class="li"><span class="dt"><b>26</b><small>Mon</small></span><span><span class="d">08:55 – 18:03</span><br><span class="t">9h 08m</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Synced</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav"><span class="on"><svg class="ic"><use href="#i-home"/></svg>Today</span><span><svg class="ic"><use href="#i-cal"/></svg>Attendance</span><span><svg class="ic"><use href="#i-leave"/></svg>Leave</span></div>
+    </div></div>
+    <figcaption><b>D · Offline, check-out waiting</b>The local event is merged into today's card, so the day looks finished. Per-event cloud icons show which half reached the server. The copy explicitly says closing the app is safe, which is the restart step in the demo.</figcaption>
+  </figure>
+
+  <!-- E: Outside geofence -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>08:24</span><span>5G</span></div>
+        <div class="hdr"><div class="avatar">AN</div><div class="who"><b>Anjali Nair</b><span>EMP-1042 · Engineering</span></div><span class="spill"><svg class="ic s"><use href="#i-cloudok"/></svg>Synced</span></div>
+      </div>
+      <div class="body lift">
+        <div class="card hero">
+          <div class="row"><span class="k">Wednesday, 28 Oct</span><span class="chip c-n">Not checked in</span></div>
+          <div class="mapbox">
+            <div class="geo" style="width:64px;height:64px;left:34px;top:16px"></div>
+            <div class="pin" style="background:var(--a-brand);left:60px;top:42px"></div>
+            <div class="pin pulse" style="background:var(--a-red);left:205px;top:66px"></div>
+            <span style="position:absolute;left:8px;bottom:6px;font-size:9.5px;color:var(--a-brand);font-weight:600">Office · 200 m zone</span>
+            <span style="position:absolute;right:10px;top:46px;font-size:9.5px;color:var(--a-red);font-weight:600">You</span>
+          </div>
+          <div class="loc bad" id="e-loc" aria-live="polite"><svg class="ic"><use href="#i-pin"/></svg><div><b>You're 850 m from the office</b><span>Check-in opens within 200 m of Infopark Phase 1. Move closer and it unlocks automatically.</span></div></div>
+          <div class="slide off" id="e-lock" role="button" tabindex="0" aria-label="Check-in locked: you are outside the office area"><span class="knob"><svg class="ic"><use href="#i-lock"/></svg></span>Check-in locked</div>
+          <div class="btn ghost sm" id="e-refresh" role="button" tabindex="0"><svg class="ic s"><use href="#i-refresh"/></svg>Update my location</div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="k">Leave available</span><span class="sub" style="color:var(--a-brand);font-weight:600">Apply</span></div>
+          <div class="bal">
+            <div><span class="v">6</span> <span class="sub">casual</span><div class="bar"><i style="width:60%"></i></div></div>
+            <div><span class="v">4</span> <span class="sub">sick</span><div class="bar"><i style="width:67%"></i></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="nav"><span class="on"><svg class="ic"><use href="#i-home"/></svg>Today</span><span><svg class="ic"><use href="#i-cal"/></svg>Attendance</span><span><svg class="ic"><use href="#i-leave"/></svg>Leave</span></div>
+    </div></div>
+    <figcaption><b>E · Outside the office area</b><span class="try">Try it · tap the locked slider or Update my location</span><br>The distance and the 200 m limit are stated plainly, with a simple map instead of an error dialog. The slider is visibly locked. Location refreshes while the screen is open, so it unlocks when the person arrives.</figcaption>
+  </figure>
+
+  <!-- F: Permission permanently denied -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>08:30</span><span>5G</span></div>
+        <div class="hdr"><div class="avatar">AN</div><div class="who"><b>Anjali Nair</b><span>EMP-1042 · Engineering</span></div></div>
+      </div>
+      <div class="body lift"><div class="card hero" style="height:200px"></div></div>
+      <div class="scrim"></div>
+      <div class="sheet">
+        <div class="grab"></div>
+        <div class="badge" style="background:var(--a-amber-soft);color:var(--a-amber)"><svg class="ic"><use href="#i-gps"/></svg></div>
+        <h5 style="text-align:center">Location is turned off for REBS</h5>
+        <p class="sub" style="font-size:12px;text-align:center">Attendance only counts at the office, so the app checks your location at the moment you check in. It isn't tracked at other times.</p>
+        <div class="steps">
+          <div class="step"><i>1</i><span>Tap <b>Open settings</b> below</span></div>
+          <div class="step"><i>2</i><span>Go to <b>Permissions → Location</b></span></div>
+          <div class="step"><i>3</i><span>Choose <b>Allow only while using the app</b>, then come back</span></div>
+        </div>
+        <div class="btn">Open settings</div>
+        <div class="sub" style="text-align:center;font-size:10.5px">Other states use this sheet: <b>Denied</b> → "Allow location" re-asks · <b>GPS off</b> → "Turn on location" · <b>No fix in 10 s</b> → "Try again"</div>
+      </div>
+    </div></div>
+    <figcaption><b>F · Location permission, permanently denied</b>Explains why location is needed and that it isn't tracked, then gives the exact steps (a real sequence, so numbered). The app re-checks permission when it returns to the foreground.</figcaption>
+  </figure>
+
+  <!-- G: Sync sheet -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>08:41</span><span>5G</span></div>
+        <div class="hdr"><div class="avatar">AN</div><div class="who"><b>Anjali Nair</b><span>EMP-1042 · Engineering</span></div><span class="spill bad" id="g-pill" aria-live="polite"><svg class="ic s"><use href="#i-alert"/></svg>Needs attention</span></div>
+      </div>
+      <div class="scrim"></div>
+      <div class="sheet" style="top:70px;gap:10px">
+        <div class="grab"></div>
+        <div class="row"><h5>Sync</h5><span class="chip c-g"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>Online</span></div>
+        <div class="sub" id="g-last">Last synced 08:40:52 · events send in the order they happened</div>
+        <div class="tl">
+          <div class="tli" id="g1"><span class="node n-wait"><svg class="ic"><use href="#i-clock"/></svg></span><div><b>Check-out · Wed 28 Oct, 18:06</b><div class="t">Timed out · will retry, attempt 2</div></div></div>
+          <div class="tli" id="g2"><span class="node n-wait"><svg class="ic"><use href="#i-clock"/></svg></span><div><b>Check-in · Thu 29 Oct, 08:31</b><div class="t">Waiting for the check-out above</div></div></div>
+          <div class="tli" id="g3"><span class="node n-bad"><svg class="ic"><use href="#i-ban"/></svg></span><div><b>Check-in · Tue 27 Oct, 08:40</b><div class="t">Not accepted</div>
+            <div class="explain"><span><b>Attendance already exists for 27 Oct.</b> A check-in at 08:41 was already recorded, possibly from another device. Your record for that day is unchanged.</span><span class="sub" style="color:var(--a-sub)">Nothing to do. <span class="lnk" id="g-dismiss" role="button" tabindex="0">Dismiss</span></span></div>
+          </div></div>
+        </div>
+        <div style="flex:1"></div>
+        <div class="btn" id="g-sync" role="button" tabindex="0"><svg class="ic s"><use href="#i-sync"/></svg><span>Sync now</span></div>
+        <div class="sub" style="text-align:center;font-size:10.5px">Also syncs on reconnect, on app open and on pull-to-refresh</div>
+      </div>
+    </div></div>
+    <figcaption><b>G · Sync sheet, opened from the header pill</b><span class="try">Try it · Sync now, then Dismiss</span><br>A timeline shows the order rule visibly: the later event waits for the earlier one. Rejections say what happened, whether the person's record is affected, and what to do. Event IDs are hidden here and shown on long-press for support.</figcaption>
+  </figure>
+
+  <!-- H: Attendance calendar -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="sb"><span>10:12</span><span>5G</span></div>
+      <div class="appbar"><h4>Attendance</h4><span class="spill wait"><svg class="ic s"><use href="#i-cloudoff"/></svg>1 waiting</span></div>
+      <div class="body">
+        <div class="card" style="gap:8px">
+          <div class="row"><svg class="ic" style="color:var(--a-sub)"><use href="#i-chevl"/></svg><b style="font-size:13px">October 2026</b><svg class="ic" style="color:var(--a-sub)"><use href="#i-chev"/></svg></div>
+          <div class="cal" id="cal-oct"></div>
+          <div class="legend"><span><i style="background:var(--a-green)"></i>Present</span><span><i style="background:var(--a-amber)"></i>Waiting to sync</span><span><i style="background:var(--a-blue-soft);border:1px solid var(--a-blue)"></i>On leave</span></div>
+        </div>
+        <div class="row" style="gap:8px">
+          <div class="card" style="flex:1;padding:9px 11px;gap:0"><span class="k">Present</span><span class="v">19 days</span></div>
+          <div class="card" style="flex:1;padding:9px 11px;gap:0"><span class="k">Avg day</span><span class="v">8h 58m</span></div>
+        </div>
+        <div class="card" style="gap:4px">
+          <div class="row"><span class="k">Wed, 28 Oct</span><span class="chip c-a"><svg class="ic"><use href="#i-clock"/></svg>Waiting</span></div>
+          <div class="row"><div><span class="sub">In</span> <b>08:32</b></div><div><span class="sub">Out</span> <b>18:06</b></div><div><span class="sub">Worked</span> <b>9h 34m</b></div></div>
+        </div>
+      </div>
+      <div class="nav"><span><svg class="ic"><use href="#i-home"/></svg>Today</span><span class="on"><svg class="ic"><use href="#i-cal"/></svg>Attendance</span><span><svg class="ic"><use href="#i-leave"/></svg>Leave</span></div>
+    </div></div>
+    <figcaption><b>H · Attendance month</b>A calendar answers "did I miss a day?" faster than a list. Tapping a day shows its detail below. Months already viewed are cached for offline use; an accessible list view is one toggle away.</figcaption>
+  </figure>
+
+  </div>
+</section>
+
+<section>
+  <div class="col" style="display:flex;flex-direction:column;gap:12px">
+    <span class="eyebrow">Screens</span>
+    <h2>Leave, states and tools</h2>
+  </div>
+  <div class="gallery">
+
+  <!-- I: Leave home -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="sb"><span>11:10</span><span>5G</span></div>
+      <div class="appbar"><h4>Leave</h4><span class="spill"><svg class="ic s"><use href="#i-cloudok"/></svg>Synced</span></div>
+      <div class="body">
+        <div class="bal">
+          <div class="card" style="gap:5px"><span class="k">Casual</span><div><span class="v" style="font-family:var(--f-display);font-size:24px">6</span> <span class="sub">of 10 left</span></div><div class="bar"><i style="width:60%"></i></div><span class="sub" style="font-size:10px">2 on hold in a pending request</span></div>
+          <div class="card" style="gap:5px"><span class="k">Sick</span><div><span class="v" style="font-family:var(--f-display);font-size:24px">4</span> <span class="sub">of 6 left</span></div><div class="bar"><i style="width:67%"></i></div><span class="sub" style="font-size:10px">&nbsp;</span></div>
+        </div>
+        <div class="tabs"><span class="on">All</span><span>Pending 1</span><span>Approved</span><span>Rejected</span></div>
+        <div class="card" style="gap:2px"><div class="list">
+          <div class="li"><span class="dt"><b>5</b><small>Nov</small></span><span><span class="d">Casual · 5–6 Nov</span><br><span class="t">2 days · Family function in Thrissur</span></span><span class="chip c-a"><svg class="ic"><use href="#i-clock"/></svg>Pending</span></div>
+          <div class="li"><span class="dt"><b>14</b><small>Oct</small></span><span><span class="d">Sick · 14 Oct</span><br><span class="t">1 day · Viral fever</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Approved</span></div>
+          <div class="li"><span class="dt"><b>2</b><small>Sep</small></span><span><span class="d">Casual · 2–4 Sep</span><br><span class="t">Release week, please reschedule</span></span><span class="chip c-r"><svg class="ic"><use href="#i-x"/></svg>Rejected</span></div>
+          <div class="li"><span class="dt"><b>18</b><small>Aug</small></span><span><span class="d">Casual · 18 Aug</span><br><span class="t">1 day · Onam preparations</span></span><span class="chip c-g"><svg class="ic"><use href="#i-check"/></svg>Approved</span></div>
+        </div></div>
+      </div>
+      <div class="fab"><svg class="ic"><use href="#i-plus"/></svg>Apply for leave</div>
+      <div class="nav"><span><svg class="ic"><use href="#i-home"/></svg>Today</span><span><svg class="ic"><use href="#i-cal"/></svg>Attendance</span><span class="on"><svg class="ic"><use href="#i-leave"/></svg>Leave</span></div>
+    </div></div>
+    <figcaption><b>I · Leave overview</b>Balances show what's left of the yearly entitlement and what's held by pending requests, so the number the form validates against is never a surprise. A rejected request shows the manager's reason in the list. Offline, the button greys out and says "Needs a connection".</figcaption>
+  </figure>
+
+  <!-- J: Leave form, dates with overlap -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="sb"><span>11:12</span><span>5G</span></div>
+      <div class="appbar"><svg class="ic l"><use href="#i-x"/></svg><h4 style="font-size:16px;flex:1">Apply for leave</h4><span class="sub">1 of 2</span></div>
+      <div class="body">
+        <div class="typecards">
+          <div class="tc on"><b>Casual</b><span class="sub">6 days available</span></div>
+          <div class="tc"><b>Sick</b><span class="sub">4 days available</span></div>
+        </div>
+        <div class="card" style="gap:6px;padding:10px">
+          <div class="row"><svg class="ic" style="color:var(--a-sub)"><use href="#i-chevl"/></svg><b style="font-size:13px">November 2026</b><svg class="ic" style="color:var(--a-sub)"><use href="#i-chev"/></svg></div>
+          <div class="cal" id="cal-nov"></div>
+          <div class="legend"><span><i style="background:var(--a-amber-soft);border:1px solid var(--a-amber)"></i>Your pending request</span><span><i style="background:var(--a-brand)"></i>Selected</span></div>
+        </div>
+        <div class="ferr" id="j-msg" aria-live="polite"><svg class="ic s"><use href="#i-alert"/></svg><span><b>4–6 Nov overlaps your pending request for 5–6 Nov.</b> Choose dates that don't include those days, or cancel that request first.</span></div>
+        <div style="flex:1"></div>
+        <div class="btn dis" id="j-cont">Continue</div>
+      </div>
+    </div></div>
+    <figcaption><b>J · Choose type and dates</b><span class="try">Try it · tap a start and an end date</span><br>Step 1 of 2. The range picker starts at the company's today, so past dates can't be picked. Existing pending and approved requests are drawn on the calendar, which makes overlap visible before it becomes an error.</figcaption>
+  </figure>
+
+  <!-- K: Leave form review + server error -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="sb"><span>11:14</span><span>5G</span></div>
+      <div class="appbar"><svg class="ic l"><use href="#i-chevl"/></svg><h4 style="font-size:16px;flex:1">Apply for leave</h4><span class="sub">2 of 2</span></div>
+      <div class="body">
+        <div class="banner b-err"><svg class="ic s"><use href="#i-alert"/></svg><span><b>REBS didn't accept this request.</b> 2–3 Nov falls in a team blackout period. Go back and pick other dates. Your reason is kept.</span></div>
+        <div class="sum">
+          <div class="row"><span class="sub">Type</span><b>Sick leave</b></div>
+          <div class="row"><span class="sub">Dates</span><b style="color:var(--a-red)">Mon 2 – Tue 3 Nov</b></div>
+          <div class="row"><span class="sub">Days</span><b>2 calendar days</b></div>
+          <div class="row"><span class="sub">Sick left after this</span><b>2 of 6</b></div>
+        </div>
+        <div class="field"><label for="r1">Reason</label>
+          <textarea class="inp ok" id="r1" rows="3">Fever, doctor advised two days of rest.</textarea>
+          <div class="row" style="align-items:flex-start"><span class="fok" id="k-stat" aria-live="polite"><svg class="ic s"><use href="#i-check"/></svg>Looks good</span><span class="mnum" id="k-count" style="color:var(--a-sub);white-space:nowrap">33 characters</span></div>
+        </div>
+        <div class="sub" style="font-size:10.5px">Errors appear only after the field is touched. Spaces don't count toward the 10-character minimum.</div>
+        <div style="flex:1"></div>
+        <div class="btn ghost">Change dates</div>
+        <div class="btn"><svg class="ic s"><use href="#i-send"/></svg>Submit request</div>
+      </div>
+    </div></div>
+    <figcaption><b>K · Review, server rejected</b><span class="try">Try it · edit the reason</span><br>Local rules passed but the API said no (mock scenario <code>leave_rejected</code>). The message names the server, the reason, and the fix, highlights the field it concerns, and keeps what was typed.</figcaption>
+  </figure>
+
+  <!-- L: Leave submitted -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="sb"><span>11:16</span><span>5G</span></div>
+      <div class="body" style="justify-content:center;align-items:stretch;gap:14px;padding:0 20px;text-align:center">
+        <div class="badge" style="background:var(--a-brand-soft);color:var(--a-brand);width:72px;height:72px"><svg class="ic"><use href="#i-send"/></svg></div>
+        <h4 style="margin:0;font-family:var(--f-display);font-size:22px">Request sent</h4>
+        <p class="sub" style="font-size:12.5px">Your manager will review it. You'll see the decision in Leave.</p>
+        <div class="sum" style="text-align:left;background:var(--a-card);border:1px solid var(--a-line)">
+          <div class="row"><span class="sub">Casual leave</span><span class="chip c-a"><svg class="ic"><use href="#i-clock"/></svg>Pending</span></div>
+          <div class="row"><span class="sub">Dates</span><b>Mon 9 – Wed 11 Nov</b></div>
+          <div class="row"><span class="sub">Days</span><b>3</b></div>
+          <div class="row"><span class="sub">Casual left</span><b>3 of 10 (3 on hold)</b></div>
+        </div>
+        <div class="btn">Back to leave</div>
+      </div>
+    </div></div>
+    <figcaption><b>L · Submitted</b>Confirms what was sent and the new balance, so nobody wonders whether it worked. The new request appears at the top of the list as Pending.</figcaption>
+  </figure>
+
+  <!-- M: Loading + error -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="band">
+        <div class="sb"><span>08:01</span><span>5G</span></div>
+        <div class="hdr"><div class="avatar" style="background:rgba(255,255,255,.14)"></div><div class="who" style="gap:6px"><div class="sk" style="width:110px"></div><div class="sk" style="width:150px;height:9px"></div></div></div>
+      </div>
+      <div class="body lift">
+        <div class="card hero"><div class="sk" style="width:45%"></div><div class="sk" style="height:58px;border-radius:12px"></div><div class="sk" style="height:46px;border-radius:99px"></div></div>
+        <span class="k" style="padding:2px 4px 0">Error, nothing cached</span>
+        <div class="card" style="align-items:center;text-align:center;padding:18px 14px;gap:8px">
+          <div class="badge" style="background:var(--a-red-soft);color:var(--a-red);width:44px;height:44px"><svg class="ic"><use href="#i-cloudoff"/></svg></div>
+          <b style="font-size:13px">Couldn't reach REBS</b>
+          <span class="sub">The server didn't respond (error 500). Check that the mock API is running, then try again.</span>
+          <div class="btn sm" style="width:100%"><svg class="ic s"><use href="#i-refresh"/></svg>Try again</div>
+        </div>
+        <span class="k" style="padding:2px 4px 0">Error, cache available</span>
+        <div class="banner b-err"><svg class="ic s"><use href="#i-alert"/></svg><span>Couldn't refresh. Showing data from 17:40. <b>Retry</b></span></div>
+      </div>
+    </div></div>
+    <figcaption><b>M · Loading and error states</b>Skeletons mirror the real layout so nothing jumps on load, and they only appear on first launch. Errors say what failed and how to fix it. With a cache, the error shrinks to a banner above real data.</figcaption>
+  </figure>
+
+  <!-- N: Dev settings -->
+  <figure>
+    <div class="phone"><div class="scr">
+      <div class="sb"><span>10:30</span><span>5G</span></div>
+      <div class="appbar"><h4 style="font-size:17px">Developer settings</h4><span class="chip c-n">Debug build</span></div>
+      <div class="body">
+        <div class="card" style="gap:2px"><span class="k">Location</span>
+          <div class="radio">Use device GPS<i></i></div>
+          <div class="radio">At office · 0 m<i class="on"></i></div>
+          <div class="radio">Near edge · 190 m<i></i></div>
+          <div class="radio">Outside · 850 m<i></i></div>
+          <div class="radio">GPS unavailable<i></i></div>
+          <div class="radio">Permission denied / blocked<i></i></div>
+        </div>
+        <div class="card"><span class="k">Mock API scenario</span>
+          <div class="tabs"><span class="on">success</span><span>slow</span><span>timeout_after_commit</span><span>server_error</span><span>attendance_conflict</span><span>leave_rejected</span></div>
+          <div class="btn ghost sm"><svg class="ic s"><use href="#i-refresh"/></svg>Reset mock data</div></div>
+        <div class="card" style="gap:4px"><div class="row"><span class="sub">Office</span><span class="mnum">10.0159, 76.3419 · 200 m</span></div><div class="row"><span class="sub">Timezone</span><span class="mnum">Asia/Kolkata</span></div><div class="row"><span class="sub">API</span><span class="mnum">10.0.2.2:8080</span></div></div>
+      </div>
+    </div></div>
+    <figcaption><b>N · Developer settings</b>Opened by long-pressing the avatar in debug builds only. Lets reviewers switch location and mock scenarios from the phone, so every step of the demo video is repeatable.</figcaption>
+  </figure>
+
+  </div>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Design system</span>
+  <h2>Tokens for the Flutter theme</h2>
+  <p>These map one-to-one onto a Material 3 <code>ColorScheme</code> plus a small <code>ThemeExtension</code> for the sync states, so widgets never use raw colours.</p>
+  <div class="swatches">
+    <div class="sw"><i style="background:#0b3f37"></i><span>Header band<br><code>deep #0B3F37</code></span></div>
+    <div class="sw"><i style="background:#0f6b5c"></i><span>Primary<br><code>brand #0F6B5C</code></span></div>
+    <div class="sw"><i style="background:#f1f4f3"></i><span>Background<br><code>#F1F4F3</code></span></div>
+    <div class="sw"><i style="background:#1a7442"></i><span>Synced / present<br><code>#1A7442</code></span></div>
+    <div class="sw"><i style="background:#a8640a"></i><span>Waiting / pending<br><code>#A8640A</code></span></div>
+    <div class="sw"><i style="background:#bf342a"></i><span>Rejected / error<br><code>#BF342A</code></span></div>
+    <div class="sw"><i style="background:#2a5fb0"></i><span>In progress / leave<br><code>#2A5FB0</code></span></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Role</th><th>Spec</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td>Display</td><td class="num">Bricolage Grotesque 700 · 20–28</td><td>Screen titles, timer, balances</td></tr>
+      <tr><td>Body</td><td class="num">IBM Plex Sans 400–600 · 12–15</td><td>Everything else; tabular figures for times</td></tr>
+      <tr><td>Spacing</td><td class="num">4 · 8 · 12 · 16 · 24</td><td>Card padding 12–14, screen gutter 12–16</td></tr>
+      <tr><td>Radius</td><td class="num">12 inputs · 18 cards · 26 sheets · pill</td><td>Larger radius marks a higher layer</td></tr>
+      <tr><td>Touch</td><td class="num">min 48 dp · slider 52 dp</td><td>All interactive elements</td></tr>
+    </tbody></table></div>
+  <div class="grid2">
+    <div class="panel"><h3>Reusable widgets</h3><p><code>SlideToConfirm</code>, <code>SyncPill</code>, <code>StatusChip</code> (icon + label per state), <code>LocationStatusTile</code>, <code>ShiftRing</code>, <code>StaleDataBanner</code>, <code>LeaveRangeCalendar</code>, <code>StateView</code> (loading / empty / error wrapper).</p></div>
+    <div class="panel"><h3>Motion tokens</h3><p><code>AppMotion</code> in <code>lib/ui/theme/app_motion.dart</code>: fast 150 ms, base 250 ms, slow 400 ms, ring 900 ms. Curves: <code>easeOutCubic</code> for state changes, <code>easeOutBack</code> for confirmations, a spring for the slider. All return zero when reduce motion is on.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="col" style="display:flex;flex-direction:column;gap:12px">
+    <span class="eyebrow">Motion plan</span>
+    <h2>Animations we will build</h2>
+    <p class="lede">Every animation explains a change of state: something was recorded, something is waiting, something needs a look. Nothing loops unless the app is actually waiting, and everything turns off with the system reduce-motion setting.</p>
+  </div>
+  <div class="tbl motion"><table>
+    <thead><tr><th>Animation</th><th>Screens</th><th>What it tells the person</th><th>Flutter implementation</th><th>Timing</th></tr></thead>
+    <tbody>
+      <tr><td>Slide to confirm</td><td>A, B</td><td>The action needs intent. Releasing early snaps back; a full slide commits once.</td><td>Drag via <code>GestureDetector</code>; <code>AnimationController</code> with a <code>SpringSimulation</code> for snap-back; knob morphs arrow → spinner → check; haptic click at 90% and on commit.</td><td>spring · 350 ms</td></tr>
+      <tr><td>Status switch</td><td>A → B → D</td><td>The day moved to a new state (Checked in, Checked out).</td><td><code>AnimatedSwitcher</code> with fade + <code>SizeTransition</code> on the Today card body; <code>StatusChip</code> colour via <code>AnimatedContainer</code>.</td><td>250 ms · easeOutCubic</td></tr>
+      <tr><td>Shift ring</td><td>B, D</td><td>How much of the shift is done.</td><td><code>TweenAnimationBuilder&lt;double&gt;</code> driving a <code>CustomPainter</code> arc. Sweeps in on first show, eases when the minute changes. The timer text itself isn't animated.</td><td>900 ms first · 400 ms after</td></tr>
+      <tr><td>Success tick</td><td>C, L</td><td>It worked.</td><td>Scale with <code>easeOutBack</code> plus a path drawn with <code>PathMetric</code> in a <code>CustomPainter</code>; light haptic on C.</td><td>450 ms + 400 ms draw</td></tr>
+      <tr><td>Sync pill</td><td>all tabs</td><td>Synced, waiting, syncing or needs attention.</td><td><code>AnimatedSwitcher</code> crossfade between pill states; <code>RotationTransition</code> on the icon, repeating only while syncing.</td><td>200 ms · 1 s spin</td></tr>
+      <tr><td>Sync timeline</td><td>G</td><td>Events go one at a time, in order.</td><td>Per-row <code>AnimatedSwitcher</code> on the status node; dismissed rows leave with <code>AnimatedList.removeItem</code> (size + fade).</td><td>250 ms · 300 ms remove</td></tr>
+      <tr><td>Location pulse</td><td>A, E</td><td>The app is getting a GPS fix right now.</td><td>Radar ring with <code>ScaleTransition</code> + <code>FadeTransition</code>, repeating only while <code>LocationCheck.checking</code>.</td><td>1.6 s loop</td></tr>
+      <tr><td>Locked nudge</td><td>E</td><td>Check-in is locked, and why (draws the eye to the distance).</td><td><code>TweenSequence</code> horizontal shake on tap of the locked slider; light haptic.</td><td>400 ms</td></tr>
+      <tr><td>Skeleton shimmer</td><td>M</td><td>Content is loading, in this layout.</td><td><code>skeletonizer</code> (approved package) wrapping the real widgets, so the skeleton always matches.</td><td>1.4 s loop</td></tr>
+      <tr><td>Banners</td><td>A, D, I, M</td><td>Offline, stale data or a failed refresh appeared or cleared.</td><td><code>AnimatedSize</code> + <code>SlideTransition</code> from the top of the content.</td><td>220 ms</td></tr>
+      <tr><td>Balance bars</td><td>A, I</td><td>Share of leave left.</td><td><code>TweenAnimationBuilder</code> on the fill width, first build only.</td><td>700 ms</td></tr>
+      <tr><td>Range calendar</td><td>J, H</td><td>Which days are selected, and whether the range is valid.</td><td><code>AnimatedContainer</code> per day cell; validation message via <code>AnimatedSize</code>.</td><td>150 ms · 200 ms</td></tr>
+      <tr><td>Form steps</td><td>J ↔ K</td><td>Moving forward or back in the apply flow.</td><td><code>AnimatedSwitcher</code> with slide-x + fade, direction from the step change.</td><td>250 ms</td></tr>
+      <tr><td>Field errors</td><td>K</td><td>A field needs fixing.</td><td>Error text through <code>AnimatedSize</code> + fade; border colour via the input theme.</td><td>180 ms</td></tr>
+      <tr><td>Tab indicator</td><td>bottom nav</td><td>Which tab is active.</td><td><code>AnimatedContainer</code> on the pill behind the icon.</td><td>200 ms</td></tr>
+    </tbody></table></div>
+  <div class="grid2">
+    <div class="panel"><h3>How it fits Stacked</h3><p>ViewModels expose state only (<code>status</code>, <code>syncSummary</code>, <code>isSubmitting</code>), never controllers or animation values. Views use implicit animations, which need no <code>State</code>. Explicit controllers (slider, tick, pulse, shake) live inside shared widgets in <code>lib/ui/widgets/common/</code> as <code>StatefulWidget</code>s holding animation state only. That's a documented exception to the stateless shared-widget rule; views stay <code>StackedView</code>s.</p></div>
+    <div class="panel"><h3>Reduce motion</h3><p><code>AppMotion.of(context)</code> reads <code>MediaQuery.disableAnimationsOf</code>. When it's on, durations become zero, loops don't start, and the slider still works, it just doesn't spring. Haptics stay.</p></div>
+    <div class="panel"><h3>Testing animated widgets</h3><p>Loops only run while their state is active, so <code>pumpAndSettle</code> finishes. Widget tests pump with <code>disableAnimations: true</code>. <code>SlideToConfirm</code> gets its own test: one completed drag fires the callback exactly once; a short drag fires nothing.</p></div>
+    <div class="panel"><h3>Not animated on purpose</h3><p>Page routes use the platform default transition. No staggered list entrances, no hero transitions, no animated numbers on the timer. They'd add time without telling the person anything new.</p></div>
+  </div>
+</section>
+
+<section class="col">
+  <span class="eyebrow">What the brief grades</span>
+  <h2>Scope</h2>
+  <div class="grid2">
+    <div class="panel"><h3>In scope</h3><ul>
+      <li>Dashboard with loading, empty, error and offline states</li>
+      <li>Check-in / check-out with GPS + 200 m geofence and every permission case</li>
+      <li>Persistent offline queue with Pending / Synced / Rejected, manual and auto sync</li>
+      <li>Idempotent retries, including "server accepted but client timed out"</li>
+      <li>Leave form with 5 local rules, server rejection handling, offline read-only list</li>
+      <li>Mock HTTP API with switchable scenarios</li>
+      <li>4 required unit tests + 1 widget test, README, debug APK, 3–5 min video</li>
+    </ul></div>
+    <div class="panel"><h3>Out of scope (say so in README)</h3><ul>
+      <li>Login: one preconfigured employee</li>
+      <li>Background sync while the app is terminated</li>
+      <li>Overnight shifts, multiple sessions per day</li>
+      <li>Weekends and holidays in leave day counts</li>
+      <li>Leave submission while offline</li>
+      <li>Leave cancellation, approvals, notifications</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Architecture</span>
+  <h2>Four layers, one direction of dependency</h2>
+  <p>Feature-first folders, each split into the same layers. Widgets only render state and forward intents; every rule lives in plain Dart classes that tests can call without Flutter.</p>
+  <div class="layers">
+    <div class="layer"><b>presentation</b><span>Screens, widgets, Riverpod <code>Notifier</code>s that expose immutable UI state (<code>AsyncValue</code>, sealed classes). No rules in <code>build()</code>.</span></div>
+    <div class="layer"><b>domain</b><span>Entities, <code>AttendancePolicy</code> (once per day, out-only-after-in, geofence), <code>LeaveValidator</code>, <code>CompanyClock</code> (timezone-aware "today"). Pure Dart.</span></div>
+    <div class="layer"><b>data</b><span>Repositories that merge cache + API, <code>SyncEngine</code> that drains the outbox in order, <code>LocationService</code> wrapper.</span></div>
+    <div class="layer"><b>infrastructure</b><span><code>dio</code> API client, <code>drift</code> SQLite database (cache tables + <code>outbox</code>), <code>connectivity_plus</code>, <code>geolocator</code>.</span></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Choice</th><th>Package</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>State management</td><td class="num">flutter_riverpod</td><td>Compile-safe DI plus state in one tool; providers are overridable in tests (fake clock, fake API, in-memory DB) without a service locator.</td></tr>
+      <tr><td>Persistence</td><td class="num">drift (SQLite)</td><td>The outbox needs ordering, transactions and queries ("pending events for today"). Key-value stores make ordering and atomic updates awkward. Drift has an in-memory mode for tests.</td></tr>
+      <tr><td>HTTP</td><td class="num">dio</td><td>Per-request timeouts, interceptors for the <code>Idempotency-Key</code> header and the mock-scenario header.</td></tr>
+      <tr><td>Location</td><td class="num">geolocator</td><td>Distinguishes denied, deniedForever and service-disabled; gives <code>distanceBetween()</code> and a position stream for the live "at the office" tile.</td></tr>
+      <tr><td>Connectivity</td><td class="num">connectivity_plus</td><td>Triggers a sync attempt when a network returns. The actual reachability check is the request itself.</td></tr>
+      <tr><td>IDs / time</td><td class="num">uuid, timezone</td><td>UUID v4 per event; <code>timezone</code> for the configurable company zone (default <code>Asia/Kolkata</code>).</td></tr>
+      <tr><td>Fonts</td><td class="num">bundled assets</td><td>Font files shipped in <code>assets/fonts</code> so the app looks the same offline; no runtime font fetching.</td></tr>
+      <tr><td>Mock API</td><td class="num">shelf (Dart)</td><td>Same language as the app, runs with <code>dart run</code>, no Node or Docker needed by reviewers.</td></tr>
+    </tbody></table></div>
+<pre>lib/
+  core/        config, clock, errors, network, theme/ (tokens, sync_colors extension)
+  shared/      widgets/ slide_to_confirm, sync_pill, status_chip, state_view, stale_data_banner
+  features/
+    today/       presentation/ today_screen, shift_ring, location_status_tile
+    attendance/  domain/ attendance_policy · data/ sync_engine, outbox_dao · presentation/ month_calendar, sync_sheet
+    leave/       domain/ leave_validator · data/ · presentation/ leave_screen, apply_flow/, range_calendar
+    dev/         dev_settings_screen   (debug only)
+  db/          app_database.dart (drift: employee, attendance, leave_requests, outbox)
+mock_server/   bin/server.dart · scenarios.dart · data/seed.json
+test/          attendance_policy_test · sync_engine_test · leave_validator_test · widgets/</pre>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Main engineering challenge</span>
+  <h2>Offline queue, ordering and idempotency</h2>
+  <p>Every check-in or check-out becomes an <b>event</b> written to the local <code>outbox</code> table before any network call. The UI reads attendance as "server records + my un-rejected local events", so the Today card is correct offline.</p>
+<pre>outbox
+  event_id      TEXT  PK   -- UUID v4, generated once when the slide completes, never regenerated
+  type          TEXT       -- CHECK_IN | CHECK_OUT
+  work_date     TEXT       -- company-timezone date, e.g. 2026-10-28
+  occurred_at   TEXT       -- device UTC timestamp
+  lat, lng, accuracy_m REAL
+  seq           INTEGER    -- monotonically increasing, defines send order
+  status        TEXT       -- PENDING | SYNCING | SYNCED | REJECTED
+  attempts      INTEGER
+  last_error    TEXT       -- plain-language reason shown in the sync sheet
+  dismissed     INTEGER    -- user cleared a rejected event from the list</pre>
+  <div class="flow" aria-label="Event status flow">
+    <span class="n">slide</span><span class="arr">→</span><span class="n">PENDING</span><span class="arr">→</span><span class="n">SYNCING</span><span class="arr">→</span><span class="n" style="border-color:var(--accent)">SYNCED</span>
+    <span class="arr">/</span><span class="n" style="border-color:var(--bad)">REJECTED</span>
+    <span class="arr">· timeout or 5xx →</span><span class="n">back to PENDING</span>
+  </div>
+  <div class="grid2">
+    <div class="panel"><h3>Duplicate actions</h3><p>The slider locks once it completes, and the notifier ignores intents while submitting. The policy also checks the outbox: if a CHECK_IN for today exists in any non-rejected state, a second is refused before an event is created.</p></div>
+    <div class="panel"><h3>Ordering</h3><p>The sync engine sends one event at a time in <code>seq</code> order and stops at the first that stays PENDING. A CHECK_OUT is never sent before its CHECK_IN is SYNCED. A single-flight lock stops manual and automatic syncs from overlapping.</p></div>
+    <div class="panel"><h3>Timeout after server accepted</h3><p>The retry reuses the same <code>event_id</code>, in the body and as <code>Idempotency-Key</code>. The server stores processed ids; a known id returns the original result, so the client marks it SYNCED and nothing is duplicated.</p></div>
+    <div class="panel"><h3>"Attendance already exists"</h3><p>A <code>409 ATTENDANCE_EXISTS</code> for a different event id is a business rejection: mark REJECTED with a plain-language reason, refresh today from the server, and never auto-retry a 4xx.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Response</th><th>Client action</th><th>Shown as</th></tr></thead>
+    <tbody>
+      <tr><td class="num">201 / 200 replay</td><td>Store server record, refresh today</td><td><span class="pill p-ok">Synced</span></td></tr>
+      <tr><td class="num">409 / 422</td><td>Save reason, refetch today, stop chain for that day</td><td><span class="pill p-bad">Needs attention</span></td></tr>
+      <tr><td class="num">timeout / 5xx / no network</td><td>attempts++, retry with backoff, same id</td><td><span class="pill p-warn">Waiting</span></td></tr>
+    </tbody></table></div>
+  <p>Triggers: app open, app resume, connectivity regained, pull-to-refresh and <b>Sync now</b>. No background work while the app is terminated, as allowed by the brief.</p>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Trust boundary</span>
+  <h2>Checks the server must repeat</h2>
+  <p>The device can be rooted, its clock changed and its GPS mocked. Client checks exist for fast feedback only. The production server has to re-run:</p>
+  <ul>
+    <li>One check-in per employee per work day, and check-out only after check-in, computed in the company timezone on the server.</li>
+    <li>Geofence distance from the submitted coordinates, plus rejecting poor accuracy and the Android mock-location flag where available.</li>
+    <li>Timestamp sanity: <code>occurred_at</code> not in the future and within an allowed offline window (for example 24 h), with server receive time stored alongside.</li>
+    <li>Idempotency by <code>event_id</code>, backed by a unique constraint.</li>
+    <li>Leave: start ≥ company today, end ≥ start, reason length, balance, overlap with Pending/Approved, recomputed from server data in one transaction.</li>
+    <li>Identity from the auth token, never from an employee id in the body.</li>
+  </ul>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Mock API</span>
+  <h2>Contract and scenarios</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Method</th><th>Endpoint</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="num">GET</td><td class="num">/employee/me</td><td>Employee, office {lat, lng, radiusM: 200}, shift start/end, timezone.</td></tr>
+      <tr><td class="num">GET</td><td class="num">/attendance?month=YYYY-MM</td><td>Records for the month, newest first.</td></tr>
+      <tr><td class="num">POST</td><td class="num">/attendance/events</td><td>Body includes <code>eventId</code>; header <code>Idempotency-Key</code>. 201, 200 (replay), 409, 422.</td></tr>
+      <tr><td class="num">GET</td><td class="num">/leave/balance</td><td>Per type: entitlement, used, held by pending, available.</td></tr>
+      <tr><td class="num">GET</td><td class="num">/leave/requests</td><td>Pending, Approved, Rejected, with reviewer note.</td></tr>
+      <tr><td class="num">POST</td><td class="num">/leave/requests</td><td>422 with <code>{field, code, message}</code> errors, mapped onto form fields.</td></tr>
+      <tr><td class="num">POST</td><td class="num">/__mock/scenario</td><td>Sets the active scenario. Also settable per request with <code>X-Mock-Scenario</code>.</td></tr>
+      <tr><td class="num">POST</td><td class="num">/__mock/reset</td><td>Restores seed data for repeatable demos.</td></tr>
+    </tbody></table></div>
+  <p>The contract adds shift times and a balance breakdown to support the shift ring and "on hold" balance; the README will note these as deliberate changes.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Scenario</th><th>Behaviour</th></tr></thead>
+    <tbody>
+      <tr><td class="num">success</td><td>Normal responses, 150 ms latency.</td></tr>
+      <tr><td class="num">slow</td><td>4 s latency, still succeeds.</td></tr>
+      <tr><td class="num">timeout_after_commit</td><td>Saves the event, then sleeps past the client's 8 s timeout. Proves the idempotent replay.</td></tr>
+      <tr><td class="num">server_error</td><td>500 on every call.</td></tr>
+      <tr><td class="num">attendance_conflict</td><td>409 ATTENDANCE_EXISTS on the next check-in.</td></tr>
+      <tr><td class="num">leave_rejected</td><td>422 "Falls in a team blackout period" even when local validation passes.</td></tr>
+    </tbody></table></div>
+  <p>Base URL: <code>http://10.0.2.2:8080</code> on the Android emulator, LAN IP on a physical device, passed with <code>--dart-define=API_BASE_URL=…</code>. No secrets anywhere.</p>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Reviewer tooling</span>
+  <h2>Simulating location</h2>
+  <ul>
+    <li><b>In-app (recommended):</b> Developer settings (screen N) with office, edge, outside, unavailable and denied presets, implemented as a <code>FakeLocationService</code> provider override in debug builds only.</li>
+    <li><b>Emulator:</b> Extended controls → Location, enter the office coordinates from the README.</li>
+    <li><b>Config:</b> <code>--dart-define=OFFICE_LAT=10.0159 --dart-define=OFFICE_LNG=76.3419 --dart-define=OFFICE_RADIUS_M=200</code>.</li>
+  </ul>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Required tests</span>
+  <h2>Test plan</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>#</th><th>Test</th><th>Setup</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Check-out without check-in is rejected</td><td><code>AttendancePolicy</code> unit test, empty day → <code>CheckOutBeforeCheckIn</code> failure, outbox stays empty.</td></tr>
+      <tr><td class="num">2</td><td>Repeated submission or retry creates no duplicate</td><td>Two confirm intents → one outbox row. Fake API that commits then throws timeout; second sync reuses id and server store holds one record.</td></tr>
+      <tr><td class="num">3</td><td>Pending survives persistence, syncs in order</td><td>Drift on a temp file: enqueue IN + OUT offline, close DB, reopen, sync; fake API records order IN → OUT, both Synced.</td></tr>
+      <tr><td class="num">4</td><td>Overlapping leave dates are rejected</td><td><code>LeaveValidator</code> with Pending 5–6 Nov; 4–6 Nov fails, adjacent dates and a Rejected overlap pass.</td></tr>
+      <tr><td class="num">5</td><td>Widget test: waiting-to-sync state</td><td>Override providers with one pending event; expect the "1 waiting" pill, the Waiting chip and the offline banner text.</td></tr>
+      <tr><td class="num">+</td><td>Extras if time allows</td><td><code>SlideToConfirm</code> fires once per completed drag; geofence at 199/201 m; company date at 23:59 / 00:01; 409 → Needs attention.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="col">
+  <span class="eyebrow">8-hour budget</span>
+  <h2>Build order</h2>
+  <p>Graded core first. The richer UI is built from a few shared widgets, so most of its cost sits in block 5.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Block</th><th>Work</th><th>Time</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Project setup, theme tokens, drift schema, mock server with seed data and scenarios</td><td class="num">1h 00m</td></tr>
+      <tr><td class="num">2</td><td>Domain: <code>CompanyClock</code>, <code>AttendancePolicy</code>, <code>LeaveValidator</code> + tests 1 and 4</td><td class="num">0h 45m</td></tr>
+      <tr><td class="num">3</td><td>Outbox, <code>SyncEngine</code>, idempotent API client + tests 2 and 3</td><td class="num">1h 30m</td></tr>
+      <tr><td class="num">4</td><td>Location service, geofence, permission sheet, fake location provider</td><td class="num">0h 45m</td></tr>
+      <tr><td class="num">5</td><td>Shared widgets, Today, sync pill and sheet, attendance calendar, all states</td><td class="num">2h 00m</td></tr>
+      <tr><td class="num">6</td><td>Leave overview, two-step apply flow, server errors + widget test</td><td class="num">1h 15m</td></tr>
+      <tr><td class="num">7</td><td>README, debug APK, demo recording</td><td class="num">0h 45m</td></tr>
+    </tbody></table></div>
+  <p>If time runs short, cut in this order: the decorative animations (location pulse, locked-slider shake, balance bar fill, step slide), then the month calendar falls back to a list, the map in screen E becomes text only, the confirmation sheet becomes a snackbar. The slider, status switch and sync pill animations stay because they carry meaning.</p>
+</section>
+
+<section class="col">
+  <span class="eyebrow">Deliverables</span>
+  <h2>Demo script and README outline</h2>
+  <div class="grid2">
+    <div class="panel"><h3>Video (3–5 min)</h3><ol>
+      <li>Cold start: skeleton → Today (A)</li>
+      <li>Slide to check in online → confirmation (C)</li>
+      <li>Airplane mode, slide to check out → "1 waiting" (D)</li>
+      <li>Kill and reopen the app; still waiting</li>
+      <li>Reconnect → auto sync; then <code>timeout_after_commit</code> + Sync now (G)</li>
+      <li>Leave: overlap error (J), server rejection (K), success (L)</li>
+    </ol></div>
+    <div class="panel"><h3>README sections</h3><ul>
+      <li>Setup: Flutter version, <code>dart run mock_server/bin/server.dart</code>, run flags</li>
+      <li>Architecture and state management rationale</li>
+      <li>UX decisions (the seven above, short)</li>
+      <li>Event identity and idempotency</li>
+      <li>Checks the server must repeat</li>
+      <li>Simulating location and mock scenarios</li>
+      <li>Assumptions, limitations, unfinished work, time spent, AI tools used</li>
+    </ul></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  function build(id, offset, days, clsFor){
+    var el=document.getElementById(id); if(!el) return;
+    var h=['M','T','W','T','F','S','S'], html='';
+    h.forEach(function(x){html+='<span class="h">'+x+'</span>';});
+    for(var i=0;i<offset;i++) html+='<span></span>';
+    for(var d=1; d<=days; d++){
+      var dow=(offset+d-1)%7; // 0 = Monday
+      html+='<span class="d '+clsFor(d,dow)+'">'+d+'</span>';
+    }
+    el.innerHTML=html;
+  }
+  // October 2026 starts on a Thursday; today is the 28th
+  build('cal-oct',3,31,function(d,dow){
+    if(dow>4) return 'we';
+    if(d===14) return 'lv';
+    if(d<28) return 'p';
+    if(d===28) return 'pe td';
+    return 'fu';
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var reduce=false;
+  try{ reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  function ic(id,cls){ return '<svg class="ic '+(cls||'')+'"><use href="#'+id+'"/></svg>'; }
+  function onActivate(el,fn){
+    if(!el) return;
+    el.addEventListener('click',fn);
+    el.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fn(e); } });
+  }
+  function restart(el,cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+
+  // Live shift timer on screen B
+  var tickEl=document.getElementById('tick'), secs=1*3600+15*60+32, timer=null;
+  function fmt(n){ var h=Math.floor(n/3600), m=Math.floor(n%3600/60), s=n%60; return h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s; }
+  function startTick(){ if(tickEl && !timer) timer=setInterval(function(){ secs++; tickEl.textContent=fmt(secs); },1000); }
+  function stopTick(){ clearInterval(timer); timer=null; }
+  startTick();
+
+  // Slide to confirm on screens A and B
+  document.querySelectorAll('[data-slide]').forEach(function(s){
+    var knob=s.querySelector('.knob'), fill=s.querySelector('.fill'), lbl=s.querySelector('.lbl');
+    var label=lbl.textContent, x=0, start=0, dragging=false, done=false;
+    function max(){ return s.clientWidth-knob.offsetWidth-10; }
+    function move(v,animate){
+      x=Math.max(0,Math.min(v,max()));
+      var t=(animate && !reduce)?'.35s cubic-bezier(.34,1.56,.64,1)':'0s';
+      knob.style.transition='transform '+t;
+      fill.style.transition='width '+t;
+      knob.style.transform='translateX('+x+'px)';
+      fill.style.width=(x+52)+'px';
+      lbl.style.opacity=done?1:Math.max(0,1-x/(max()*0.7));
+    }
+    function complete(){
+      done=true; dragging=false;
+      s.classList.add('busy'); move(max(),true);
+      knob.innerHTML=ic('i-sync');
+      setTimeout(function(){
+        s.classList.remove('busy'); s.classList.add('done');
+        knob.innerHTML=ic('i-check');
+        lbl.textContent=s.getAttribute('data-done'); lbl.style.opacity=1;
+        s.setAttribute('aria-label',s.getAttribute('data-done')+'. Activate to reset the demo.');
+        if(s.id==='b-slide') stopTick();
+      },reduce?0:650);
+    }
+    function reset(){
+      done=false; s.classList.remove('done');
+      knob.innerHTML=ic('i-arrow'); lbl.textContent=label; s.setAttribute('aria-label',label);
+      move(0,true);
+      if(s.id==='b-slide') startTick();
+    }
+    knob.addEventListener('pointerdown',function(e){
+      if(done) return;
+      dragging=true; start=e.clientX-x;
+      try{ knob.setPointerCapture(e.pointerId); }catch(_){}
+    });
+    knob.addEventListener('pointermove',function(e){ if(dragging) move(e.clientX-start,false); });
+    function release(){ if(!dragging) return; dragging=false; if(x>=max()*0.9) complete(); else move(0,true); }
+    knob.addEventListener('pointerup',release);
+    knob.addEventListener('pointercancel',release);
+    s.addEventListener('click',function(){ if(done && !s.classList.contains('busy')) reset(); });
+    s.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); if(s.classList.contains('busy')) return; done?reset():complete(); }
+    });
+    move(0,false);
+  });
+
+  // Success tick replay on screen C
+  var badge=document.getElementById('c-badge');
+  onActivate(badge,function(){ restart(badge,'pop'); });
+
+  // Location refresh and locked nudge on screen E
+  var eLoc=document.getElementById('e-loc'), eLock=document.getElementById('e-lock');
+  if(eLoc){
+    var eOrig=eLoc.innerHTML;
+    onActivate(document.getElementById('e-refresh'),function(){
+      if(eLoc.classList.contains('wait')) return;
+      eLoc.className='loc wait';
+      eLoc.innerHTML=ic('i-gps','beat')+'<div><b>Checking your location…</b><span>Getting a GPS fix, up to 10 s</span></div>';
+      setTimeout(function(){ eLoc.className='loc bad'; eLoc.innerHTML=eOrig; },1400);
+    });
+  }
+  onActivate(eLock,function(){ restart(eLock,'shake'); if(eLoc) restart(eLoc,'shake'); });
+
+  // Sync queue on screen G
+  var NODE={wait:['n-wait','i-clock'],sync:['n-sync','i-sync'],ok:['n-ok','i-check'],bad:['n-bad','i-ban']};
+  function setNode(id,state,text){
+    var el=document.getElementById(id); if(!el) return;
+    var n=el.querySelector('.node');
+    n.className='node '+NODE[state][0];
+    n.innerHTML=ic(NODE[state][1],state==='sync'?'spin':'');
+    el.querySelector('.t').textContent=text;
+    el.setAttribute('data-state',state);
+  }
+  var gPill=document.getElementById('g-pill'), gLast=document.getElementById('g-last'), gBtn=document.getElementById('g-sync');
+  function updatePill(){
+    if(!gPill) return;
+    var waiting=['g1','g2'].filter(function(i){ var e=document.getElementById(i); return e && e.getAttribute('data-state')!=='ok'; }).length;
+    if(document.getElementById('g3')){ gPill.className='spill bad'; gPill.innerHTML=ic('i-alert','s')+'Needs attention'; }
+    else if(waiting){ gPill.className='spill wait'; gPill.innerHTML=ic('i-cloudoff','s')+waiting+' waiting'; }
+    else { gPill.className='spill'; gPill.innerHTML=ic('i-cloudok','s')+'Synced'; }
+  }
+  if(gBtn){
+    var running=false, synced=false, gLabel=gBtn.querySelector('span');
+    setNode('g1','wait','Timed out · will retry, attempt 2');
+    setNode('g2','wait','Waiting for the check-out above');
+    onActivate(gBtn,function(){
+      if(running) return;
+      if(synced){
+        setNode('g1','wait','Timed out · will retry, attempt 2');
+        setNode('g2','wait','Waiting for the check-out above');
+        gLast.textContent='Last synced 08:40:52 · events send in the order they happened';
+        gLabel.textContent='Sync now'; synced=false; updatePill(); return;
+      }
+      running=true; gBtn.classList.add('dis'); gLabel.textContent='Syncing…';
+      gPill.className='spill'; gPill.innerHTML=ic('i-sync','s spin')+'Syncing';
+      setNode('g1','sync','Sending… same event ID, attempt 3');
+      setTimeout(function(){
+        setNode('g1','ok','Synced · server returned the original record');
+        setNode('g2','sync','Sending…');
+        setTimeout(function(){
+          setNode('g2','ok','Synced');
+          gLast.textContent='Last synced 08:41:07 · events send in the order they happened';
+          running=false; synced=true; gBtn.classList.remove('dis'); gLabel.textContent='Reset demo';
+          updatePill();
+        },reduce?0:1000);
+      },reduce?0:1100);
+    });
+  }
+  onActivate(document.getElementById('g-dismiss'),function(){
+    var g3=document.getElementById('g3'); if(!g3) return;
+    g3.classList.add('gone');
+    setTimeout(function(){ g3.remove(); updatePill(); },reduce?0:360);
+  });
+
+  // Leave range calendar on screen J (November 2026 starts on a Sunday)
+  var cal=document.getElementById('cal-nov'), jMsg=document.getElementById('j-msg'), jBtn=document.getElementById('j-cont');
+  if(cal){
+    var HOLD={5:true,6:true}, BALANCE=6, sel={a:4,b:6};
+    function render(focusDay){
+      var a=sel.a, b=sel.b, days=b?b-a+1:1, overlap=false;
+      for(var d=a; d<=(b||a); d++) if(HOLD[d]) overlap=true;
+      var over=!!b && days>BALANCE, bad=!!b && (overlap||over);
+      var html='';
+      ['M','T','W','T','F','S','S'].forEach(function(h){ html+='<span class="h">'+h+'</span>'; });
+      for(var i=0;i<6;i++) html+='<span></span>';
+      for(var n=1;n<=30;n++){
+        var c='d'+(HOLD[n]?' hold':'');
+        var inRange=b?(n>=a && n<=b):n===a;
+        if(inRange){ var end=(n===a||n===b); c+=bad?(end?' selx':' midx'):(end?' sel':' mid'); }
+        html+='<span class="'+c+'" role="button" tabindex="0" data-d="'+n+'" aria-label="'+n+' November'+(HOLD[n]?', your pending leave':'')+'">'+n+'</span>';
+      }
+      cal.innerHTML=html;
+      var label=!b||a===b?a+' Nov':a+'–'+b+' Nov';
+      if(!b){
+        jMsg.className='msg-hint';
+        jMsg.innerHTML=ic('i-cal','s')+'<span>Starts '+a+' Nov. Now tap the last day of your leave.</span>';
+        jBtn.className='btn dis';
+      } else if(overlap){
+        jMsg.className='ferr';
+        jMsg.innerHTML=ic('i-alert','s')+'<span><b>'+label+' overlaps your pending request for 5–6 Nov.</b> Choose dates that don\'t include those days, or cancel that request first.</span>';
+        jBtn.className='btn dis';
+      } else if(over){
+        jMsg.className='ferr';
+        jMsg.innerHTML=ic('i-alert','s')+'<span><b>'+days+' days requested, but you have 6 casual days.</b> Shorten the range or choose sick leave.</span>';
+        jBtn.className='btn dis';
+      } else {
+        jMsg.className='msg-ok';
+        jMsg.innerHTML=ic('i-check','s')+'<span><b>'+label+' · '+days+' day'+(days>1?'s':'')+'</b> · '+(BALANCE-days)+' casual days left after this</span>';
+        jBtn.className='btn';
+      }
+      if(focusDay){ var f=cal.querySelector('[data-d="'+focusDay+'"]'); if(f) f.focus(); }
+    }
+    function pick(d,keyboard){
+      if(!sel.a || sel.b || d<sel.a) sel={a:d,b:null}; else sel.b=d;
+      render(keyboard?d:null);
+    }
+    cal.addEventListener('click',function(e){ var t=e.target.closest('[data-d]'); if(t) pick(+t.getAttribute('data-d'),false); });
+    cal.addEventListener('keydown',function(e){
+      var t=e.target.closest('[data-d]');
+      if(t && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); pick(+t.getAttribute('data-d'),true); }
+    });
+    render();
+  }
+
+  // Reason field on screen K
+  var r=document.getElementById('r1'), kStat=document.getElementById('k-stat'), kCount=document.getElementById('k-count');
+  if(r){
+    var touched=false;
+    function check(){
+      var n=r.value.replace(/\s/g,'').length;
+      if(n>=10){
+        r.className='inp ok'; kStat.className='fok';
+        kStat.innerHTML=ic('i-check','s')+'Looks good'; kCount.textContent=n+' characters';
+      } else {
+        r.className='inp'+(touched?' err':'');
+        kStat.className='ferr';
+        kStat.innerHTML=touched?ic('i-alert','s')+'Add a few more words (at least 10 characters)':'';
+        kCount.textContent=n+'/10';
+      }
+    }
+    r.addEventListener('input',function(){ touched=true; check(); });
+    r.addEventListener('blur',function(){ touched=true; check(); });
+    check();
+  }
+})();
+</script>

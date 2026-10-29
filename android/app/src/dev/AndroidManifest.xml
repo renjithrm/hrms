@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Dev flavour only (debug and release): the local mock API is served
+         over plain HTTP. Prod keeps Android's default of HTTPS only. -->
+    <application android:usesCleartextTraffic="true"/>
+</manifest>
